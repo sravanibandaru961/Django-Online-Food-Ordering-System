@@ -1,3 +1,6 @@
+## Home Screen
+
+![FoodieHub Home Page](homepage.png)
 # Django-Online-Food-ordering-System
 ## This system displays available dishes with its name, photo, category, price, and the user has to enter the quantity and customer’s name. The customer can order through online and can see she/his orders in the cart.
 
@@ -16,9 +19,8 @@
 * Login and Logout – By default one of the security features of this system is the secure login and logout system.
 
 ## Home Screen
-![image](https://user-images.githubusercontent.com/69730480/117545526-bd4a6980-b043-11eb-9f05-510b7cabe5c8.png)
-![image](https://user-images.githubusercontent.com/69730480/117544836-ddc4f480-b040-11eb-9661-3bf77ac07295.png)
-![image](https://user-images.githubusercontent.com/69730480/117544867-02b96780-b041-11eb-930e-eadbbc54f017.png)
+
+
 
 ## Login
 ![image](https://user-images.githubusercontent.com/69730480/117544906-29779e00-b041-11eb-86a7-36707f31d8ce.png)
