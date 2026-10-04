@@ -34,8 +34,10 @@
 ![FoodieHub View Item](view-item.png)
 
 
+
 ## Add to Cart
-![image](https://user-images.githubusercontent.com/69730480/117545060-d7834800-b041-11eb-97f4-e9cc66c03e01.png)
+
+![FoodieHub Add to Cart](add-to-cart.png)
 
 ## Placed Order
 ![image](https://user-images.githubusercontent.com/69730480/117545258-9a6b8580-b042-11eb-8825-8cdcfcf6d2f2.png)
