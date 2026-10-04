@@ -30,7 +30,9 @@
 ![FoodieHub Signup](signup.png)
 
 ## View Item
-![image](https://user-images.githubusercontent.com/69730480/117545036-ad318a80-b041-11eb-899f-8977c68a7699.png)
+
+![FoodieHub View Item](view-item.png)
+
 
 ## Add to Cart
 ![image](https://user-images.githubusercontent.com/69730480/117545060-d7834800-b041-11eb-97f4-e9cc66c03e01.png)
