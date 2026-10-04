@@ -25,9 +25,9 @@
 ## Login
 
 ![FoodieHub Login](login.png)
-
 ## Signup
-![image](https://user-images.githubusercontent.com/69730480/117544947-4ca24d80-b041-11eb-80f5-dab22541f039.png)
+
+![FoodieHub Signup](signup.png)
 
 ## View Item
 ![image](https://user-images.githubusercontent.com/69730480/117545036-ad318a80-b041-11eb-899f-8977c68a7699.png)
