@@ -23,7 +23,8 @@
 
 
 ## Login
-![image](https://user-images.githubusercontent.com/69730480/117544906-29779e00-b041-11eb-86a7-36707f31d8ce.png)
+
+![FoodieHub Login](login.png)
 
 ## Signup
 ![image](https://user-images.githubusercontent.com/69730480/117544947-4ca24d80-b041-11eb-80f5-dab22541f039.png)
