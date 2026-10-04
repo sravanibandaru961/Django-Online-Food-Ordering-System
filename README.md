@@ -40,7 +40,10 @@
 ![FoodieHub Add to Cart](add-to-cart.png)
 
 ## Placed Order
-![image](https://user-images.githubusercontent.com/69730480/117545258-9a6b8580-b042-11eb-8825-8cdcfcf6d2f2.png)
+
+![FoodieHub Placed Order](placed-order.png)
+
+
 
 ## Admin
 ![image](https://user-images.githubusercontent.com/69730480/117545292-bec76200-b042-11eb-8bbc-9c68114e0364.png)
