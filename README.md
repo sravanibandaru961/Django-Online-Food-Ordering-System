@@ -45,8 +45,11 @@
 
 
 
-## Admin
-![image](https://user-images.githubusercontent.com/69730480/117545292-bec76200-b042-11eb-8bbc-9c68114e0364.png)
+## Admin Dashboard
+
+![FoodieHub Admin Dashboard](admin-dashboard.png)
+
+
 
 ## Admin add item
 ![image](https://user-images.githubusercontent.com/69730480/117545336-f59d7800-b042-11eb-8aea-f1f6c8e898b7.png)
