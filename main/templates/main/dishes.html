@@ -1,0 +1,407 @@
+{% extends "main/layout.html" %}
+
+{% block content %}
+
+<style>
+
+/* ===== FOOD DETAILS PAGE ===== */
+
+.dishes {
+    background: #f8f9fa;
+    padding: 40px 0 60px;
+    min-height: 100vh;
+}
+
+/* Main food box */
+
+.food-detail-card {
+    background: white;
+    border-radius: 22px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+    margin-bottom: 40px;
+}
+
+/* Food image */
+
+.food-detail-image {
+    width: 100%;
+    height: 430px;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* Food information */
+
+.food-information {
+    padding: 25px;
+}
+
+.food-information h1 {
+    font-size: 38px;
+    font-weight: 800;
+    color: #ff6b35;
+    margin-bottom: 20px;
+}
+
+.food-description {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.7;
+}
+
+.food-price {
+    font-size: 32px;
+    font-weight: 800;
+    color: #28a745;
+    margin: 20px 0;
+}
+
+.food-pieces {
+    font-size: 17px;
+    color: #555;
+}
+
+.food-instructions {
+    background: #fff3cd;
+    border-left: 5px solid #ffb300;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    color: #555;
+}
+
+/* Add cart button */
+
+.add-cart-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6b35, #ff9f1c);
+    color: white !important;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    transition: 0.3s;
+}
+
+.add-cart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255,107,53,0.35);
+    text-decoration: none;
+}
+
+/* ===== REVIEWS ===== */
+
+.reviews-section {
+    margin-top: 30px;
+}
+
+.reviews-title {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 800;
+    color: #222;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+}
+
+.reviews-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #ff6b35;
+    margin: 12px auto 0;
+    border-radius: 10px;
+}
+
+.review-form {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+}
+
+.review-input {
+    height: 48px;
+    border-radius: 25px;
+    padding-left: 20px;
+    border: 1px solid #ddd;
+}
+
+.review-submit {
+    height: 48px;
+    border-radius: 25px;
+    background: #ff6b35;
+    color: white;
+    border: none;
+    padding: 0 25px;
+    font-weight: 600;
+}
+
+.review-submit:hover {
+    background: #e85d04;
+}
+
+/* Individual review */
+
+.review-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+}
+
+.review-user h4 {
+    margin: 0 15px 0 0;
+    color: #6a4c93;
+    font-weight: 700;
+}
+
+.review-date {
+    color: #888;
+    font-size: 14px;
+}
+
+.review-text {
+    color: #444;
+    font-size: 17px;
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+
+    .food-detail-image {
+        height: 300px;
+    }
+
+    .food-information h1 {
+        font-size: 30px;
+    }
+
+    .food-price {
+        font-size: 27px;
+    }
+
+    .review-submit {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+}
+
+</style>
+
+
+<div class="dishes">
+
+    <div class="container">
+
+        <!-- FOOD DETAILS -->
+
+        <div class="food-detail-card">
+
+            <div class="row">
+
+                <!-- IMAGE -->
+
+                <div class="col-md-6">
+
+                    <img
+                        src="{{ item.image.url }}"
+                        class="food-detail-image"
+                        alt="{{ item.title }}"
+                    >
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="col-md-6">
+
+                    <div class="food-information">
+
+                        <h1>
+                            {{ item.title }}
+
+                            {% if item.labels %}
+
+                            <span class="badge badge-{{ item.label_colour }}">
+                                {{ item.labels }}
+                            </span>
+
+                            {% endif %}
+
+                        </h1>
+
+
+                        {% if item.description %}
+
+                        <p class="food-description">
+                            {{ item.description }}
+                        </p>
+
+                        {% endif %}
+
+
+                        <div class="food-price">
+                            ₹ {{ item.price }}
+                        </div>
+
+
+                        <p class="food-pieces">
+                                <strong>{{ item.pieces }} pieces</strong> per order
+                        </p>
+
+
+                        {% if item.instructions %}
+
+                        <div class="food-instructions">
+
+                            <strong>👨‍🍳 Special Instructions</strong>
+
+                            <p class="mb-0">
+                                {{ item.instructions }}
+                            </p>
+
+                        </div>
+
+                        {% endif %}
+
+
+                        <a
+                            href="{% url 'main:add-to-cart' item.slug %}"
+                            class="add-cart-btn"
+                        >
+                            🛒 Add to Cart
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- REVIEWS -->
+
+        <div class="reviews-section">
+
+            <h2 class="reviews-title">
+    Customer Reviews
+</h2>
+
+
+            <!-- REVIEW FORM -->
+
+            <div class="review-form">
+
+                <form
+                    action="{% url 'main:add_reviews' %}"
+                    method="POST"
+                >
+
+                    {% csrf_token %}
+
+                    <div class="row">
+
+                        <div class="col-sm-10">
+
+                            <input
+                                type="text"
+                                name="review"
+                                class="form-control review-input"
+                                placeholder="💬 Share your experience..."
+                                required
+                            >
+
+                            <input
+                                type="hidden"
+                                name="rslug"
+                                value="{{ item.slug }}"
+                            >
+
+                        </div>
+
+
+                        <div class="col-sm-2">
+
+                            <button
+                                type="submit"
+                                class="review-submit"
+                            >
+                                Submit ⭐
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- EXISTING REVIEWS -->
+
+            {% for review in reviews %}
+
+            <div class="review-card">
+
+                <div class="review-user">
+
+                    <h4>
+                        👤 {{ review.user.username }}
+                    </h4>
+
+                    <span class="review-date">
+                        {{ review.posted_on }}
+                    </span>
+
+                </div>
+
+
+                <p class="review-text">
+                    "{{ review.review }}"
+                </p>
+
+            </div>
+
+            {% empty %}
+
+            <div class="text-center">
+
+                <h4>💬 No reviews yet</h4>
+
+                <p>
+                    Be the first person to review this dish! ❤️
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}

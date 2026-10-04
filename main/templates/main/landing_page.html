@@ -1,0 +1,396 @@
+{% load get_group %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Online Food Order System</title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+<!--
+
+Template 2076 Zentro
+
+http://www.tooplate.com/view/2076-zentro
+
+-->
+	<link rel="stylesheet" href="{% static "css/bootstrap.min.css"               %}">
+	<link rel="stylesheet" href="{% static "css/animate.min.css"                 %}">
+	<link rel="stylesheet" href="{% static "css/font-awesome.min.css"            %}">
+	<link rel="stylesheet" href="{% static "css/nivo-lightbox.css"               %}">
+	<link rel="stylesheet" href="{% static "css/nivo_themes/default/default.css" %}">
+	<link rel="stylesheet" href="{% static "css/style.css" %}">
+
+<style>
+	.navbar-nav > li > a,
+.navbar-btn {
+    font-size: 16px !important;
+    font-weight: 600;
+    padding: 10px 15px !important;
+    margin: 5px;
+}
+
+/* Home */
+.navbar-nav > li > a[href*="home"] {
+    color: #ff6b35 !important;
+}
+
+/* Dashboard */
+.navbar-nav > li > a[href*="admin_dashboard"] {
+    color: #6a4c93 !important;
+}
+
+/* Logout */
+.navbar-btn {
+    color: #dc3545 !important;
+}
+    /* ===== BIG FOODIEHUB TITLE ===== */
+.foodie-title {
+    font-size: 80px;
+    font-weight: 900;
+    text-align: center;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+
+    /* Professional orange + white gradient */
+    background: linear-gradient(
+        90deg,
+        #ff6b35,
+        #ffd166,
+        #ffffff,
+        #ff6b35
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    /* Makes it clearly visible on the food image */
+    text-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.9),
+        0 0 20px rgba(255, 107, 53, 0.45);
+
+    position: relative;
+    z-index: 5;
+}
+
+    /* Strong bright colors */
+    background: linear-gradient(
+        90deg,
+        #00e5ff,
+        #2979ff,
+        #d500f9,
+        #ff1744
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    /* Strong dark outline + glow */
+    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.8);
+
+    text-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.9),
+        0 0 15px rgba(0, 229, 255, 0.8),
+        0 0 30px rgba(213, 0, 249, 0.6);
+}
+/* Small glowing animation */
+@keyframes foodieGlow {
+    from {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px rgba(255, 179, 0, 0.4));
+    }
+
+    to {
+        transform: scale(1.04);
+        filter: drop-shadow(0 0 18px rgba(255, 107, 53, 0.7));
+    }
+}
+
+    #home h2 {
+        font-size: 30px;
+        font-weight: 500;
+        color: white;
+        text-align: center;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    }
+
+	.foodie-subtitle {
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff3cd;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+    margin-top: 10px;
+	}
+</style>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500"
+      rel="stylesheet" type="text/css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+	<style>
+/* ===== Custom FoodieHub Navbar ===== */
+    .foodie-subtitle {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Fresh Food */
+.foodie-subtitle span:nth-of-type(1) {
+    color: #ffd166;
+}
+
+/* Great Taste */
+.foodie-subtitle span:nth-of-type(2) {
+    color: #ff7b54;
+}
+
+/* Made with love */
+.foodie-subtitle span:nth-of-type(3) {
+    color: #ff4d6d;
+}
+
+/* Dots */
+.foodie-subtitle b {
+    color: #ffffff;
+    margin: 0 10px;
+    font-size: 25px;
+}
+
+	.navbar-default {
+    	background: #ffffff;
+    	border: none;
+    	box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+	}
+
+	.navbar-brand {
+    	color: #ff6b35 !important;
+    	font-size: 28px;
+    	font-weight: 800;
+    	letter-spacing: 1px;
+    	transition: 0.3s;
+	}
+
+	.navbar-brand:hover {
+    	color: #e85d04 !important;
+	}
+
+	/* Navigation links */
+	.navbar-nav > li > a {
+    	color: #333333 !important;
+    	font-size: 16px;
+    	font-weight: 600;
+    	margin: 8px 5px;
+    	padding: 10px 15px !important;
+    	border-radius: 25px;
+    	transition: all 0.3s ease;
+	}
+
+	/* Hover effect */
+	.navbar-nav > li > a:hover {
+    	background: #ff6b35 !important;
+    	color: white !important;
+	}
+
+	/* Active-style buttons */
+	.navbar-nav > li > a[href*="home"] {
+    	color: #ff6b35 !important;
+	}
+
+	.navbar-nav > li > a[href*="cart"] {
+    	color: #e85d04 !important;
+	}
+
+	.navbar-nav > li > a[href*="admin_dashboard"] {
+    	color: #6a4c93 !important;
+	}
+
+	/* Logout button */
+	.navbar-btn {
+    	color: #dc3545 !important;
+    	font-size: 16px;
+    	font-weight: 600;
+    	border-radius: 25px;
+    	padding: 8px 15px;
+    	transition: 0.3s;
+	}
+
+	.navbar-btn:hover {
+    	background: #dc3545 !important;
+    	color: white !important;
+	}
+
+	/* Mobile */
+	@media (max-width: 767px) {
+    .navbar-brand {
+        font-size: 23px;
+    }
+
+    .navbar-nav > li > a {
+        margin: 3px 0;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- preloader section -->
+<section class="preloader">
+	<div class="sk-spinner sk-spinner-pulse"></div>
+</section>
+
+<!-- navigation section -->
+<section class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon icon-bar"></span>
+				<span class="icon icon-bar"></span>
+				<span class="icon icon-bar"></span>
+			</button>
+			<a href="#" class="navbar-brand">FoodieHub</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'main:home' %}" class="mr-2 text-light">Home</a></li>
+        	    {% if user.is_authenticated %}
+                    {% if request.user|has_group:"admin_owner" %} 
+                        <li><a href="{% url 'main:admin_dashboard' %}" class="mr-2 text-light">DashBoard</a></li>
+                        <li><form class="logout-link mt-2 pt-2" action="{% url 'accounts:logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link navbar-btn">Logout</button>
+                            </form>
+                        </li> 
+                    {% else %}
+                        <li><a href="{% url 'main:cart' %}" class="mr-2 text-light">My Cart🛒</a></li>
+                        <li><a href="{% url 'main:order_details' %}" class="mr-2 text-light">Your Orders</a></li>
+                        <li>
+                            <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link navbar-btn">Logout</button>
+                            </form>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="{% url 'accounts:login' %}" class="mr-2 text-light">Login</a></li>
+                    <li><a href="{% url 'accounts:signup' %}" class="mr-2 text-light">SignUp</a></li>
+                {% endif %}
+			</ul>
+		</div>
+	</div>
+</section>
+
+
+<!-- home section -->
+<section id="home" class="parallax-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<h1 class="foodie-title">FoodieHub</h1>
+				<h2 class="foodie-subtitle">
+    🍴 <span>Fresh Food</span>
+    <b>•</b>
+    <span>Great Taste</span>
+    <b>•</b>
+    <span>Made with ❤️</span> 
+</h2>
+			</div>
+		</div>
+	</div>		
+</section>
+
+
+<!-- order section -->
+    <main role="main">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        
+        {% endblock content %}
+
+    </main>
+
+
+<!-- footer section -->
+<footer class="parallax-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
+				<h2 class="heading">Contact Info.</h2>
+				<div class="ph">
+					<p><i class="fa fa-phone"></i> Phone</p>
+					<h4>95-7920-2900</h4>
+				</div>
+				<div class="address">
+					<p><i class="fa fa-map-marker"></i> Our Location</p>
+					<h4>Shivaji Nagar, Pune</h4>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
+				<h2 class="heading">Open Hours</h2>
+					<p>Sunday <span>10:30 AM - 10:00 PM</span></p>
+					<p>Mon-Fri <span>9:00 AM - 8:00 PM</span></p>
+					<p>Saturday <span>11:30 AM - 10:00 PM</span></p>
+			</div>
+			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
+				<h2 class="heading">Follow Us</h2>
+				<ul class="social-icon">
+					
+					<li><a href="#" class="fa fa-behance wow bounceIn" data-wow-delay="0.9s"></a></li>
+					<li><a href="#" class="fa fa-dribbble wow bounceIn" data-wow-delay="0.9s"></a></li>
+					<li><a href="https://github.com/sravanibandaru961/Django-Online-Food-Ordering-System" class="fa fa-github wow bounceIn" data-wow-delay="0.9s"></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+<!-- copyright section -->
+
+	<section id="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+
+                <h3 class="footer-brand">🍴 FoodieHub</h3>
+
+                <p class="footer-tagline">
+                    Delicious food. Happy moments. ❤️
+                </p>
+
+                <p class="footer-copy">
+                    © 2026 FoodieHub. All Rights Reserved.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JAVASCRIPT JS FILES -->	
+<script src="{% static "js/jquery.js"            %}" ></script>
+<script src="{% static "js/bootstrap.min.js"     %}" ></script>
+<script src="{% static "js/jquery.parallax.js"   %}" ></script>
+<script src="{% static "js/smoothscroll.js"      %}" ></script>
+<script src="{% static "js/nivo-lightbox.min.js" %}" ></script>
+<script src="{% static "js/wow.min.js"           %}" ></script>
+<script src="{% static "js/custom.js"            %}" ></script>
+
+</body>
+</html>

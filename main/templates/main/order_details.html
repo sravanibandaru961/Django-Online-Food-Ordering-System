@@ -1,0 +1,251 @@
+{% extends "main/layout.html" %}
+
+{% block content %}
+
+<style>
+.order-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.order-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ff6b35;
+}
+
+.order-subtitle {
+    color: #666;
+    font-size: 16px;
+}
+
+.order-total {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 18px 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-total span {
+    font-size: 17px;
+    color: #555;
+}
+
+.order-total strong {
+    font-size: 25px;
+    color: #28a745;
+}
+
+.payment-note {
+    color: #777;
+    font-size: 14px;
+}
+</style>
+
+
+<div class="cart">
+    <div class="container">
+
+        <!-- ACTIVE ORDERS -->
+        <div class="row">
+            <div class="col-sm-12 mt-5">
+
+                <div class="order-header">
+                    <h2>Active Orders</h2>
+
+                    {% if items %}
+
+                        <p class="order-subtitle">
+                            Your order has been placed successfully.
+                        </p>
+
+                        <div class="order-total">
+                            <span>Total Amount</span>
+                            <strong>₹ {{ total }}</strong>
+                        </div>
+
+                        <p class="payment-note">
+                            Payment can be made at the time of delivery.
+                        </p>
+
+                </div>
+
+
+                <!-- ACTIVE ORDERS TABLE -->
+                <div class="table-responsive">
+
+                    <table class="table table-light">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Ordered</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Specification</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Order Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for item_active in items %}
+
+                            <tr>
+
+                                <td>
+                                    {{ item_active.ordered_date }}
+                                </td>
+
+                                <td>
+                                    {{ item_active.item.title }}
+
+                                    <span class="badge badge-{{ item_active.item.label_colour }}">
+                                        {{ item_active.item.labels }}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    {{ item_active.item.description }}
+                                </td>
+
+                                <td>
+                                    {{ item_active.item.instructions }}
+                                </td>
+
+                                <td>
+                                    {{ item_active.item.price }}
+                                </td>
+
+                                <td>
+                                    {{ item_active.item.pieces }} Quantity
+                                </td>
+
+                                <td>
+                                    {{ item_active.status }}
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                {% else %}
+
+                    <h4 class="text-center">
+                        Sorry, you have not ordered any item yet!!!
+                    </h4>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+
+        <!-- PAST ORDERS -->
+        <div class="row">
+
+            <div class="col-sm-12 mt-5">
+
+                <h3 class="text-center">
+                    Past Orders
+                </h3>
+
+                {% if cart_items %}
+
+                    <div class="table-responsive">
+
+                        <table class="table table-light">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ordered</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Specification</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Order Status</th>
+                                    <th scope="col">Delivery Date</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                {% for cart in cart_items %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ cart.ordered_date }}
+                                    </td>
+
+                                    <td>
+                                        {{ cart.item.title }}
+
+                                        <span class="badge badge-{{ cart.item.label_colour }}">
+                                            {{ cart.item.labels }}
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        {{ cart.item.description }}
+                                    </td>
+
+                                    <td>
+                                        {{ cart.item.instructions }}
+                                    </td>
+
+                                    <td>
+                                        {{ cart.item.price }}
+                                    </td>
+
+                                    <td>
+                                        {{ cart.item.pieces }} Quantity
+                                    </td>
+
+                                    <td>
+                                        {{ cart.status }}
+                                    </td>
+
+                                    <td>
+                                        {{ cart.delivery_date }}
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                {% else %}
+
+                    <h4 class="text-center">
+                        Sorry, you have not ordered any past item yet!!!
+                    </h4>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

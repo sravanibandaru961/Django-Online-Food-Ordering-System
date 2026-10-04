@@ -1,0 +1,46 @@
+.dishes .main .container .row img{
+    max-width: 540px;
+    max-height: 450px;
+    width: fit-content;
+}
+
+.dishes .main .container .row .content{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.dishes .main .container .row .information{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+html, body {
+    background-color: #F3F3F3;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    position: relative;
+    min-height: 100%;
+}
+
+.contents {
+    height: 1500px;
+}
+
+footer {
+    background-color: rgb(34, 42, 53);
+    position: absolute;
+    bottom: 0; /* absolutely bottom */
+    width: 100%;
+}
+
+.clearfix {
+    padding: 20px;
+}

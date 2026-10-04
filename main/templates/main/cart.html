@@ -1,0 +1,412 @@
+{% extends "main/layout.html" %}
+
+{% block content %}
+
+<style>
+
+/* ===== CART PAGE ===== */
+
+.cart-page {
+    background: #f8f9fa;
+    min-height: 100vh;
+    padding: 45px 0 70px;
+}
+
+/* Heading */
+
+.cart-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 800;
+    color: #ff6b35;
+    margin-bottom: 35px;
+}
+
+/* Cart box */
+
+.cart-box {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.10);
+}
+
+/* Table */
+
+.cart-table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.cart-table thead {
+    background: #ff6b35;
+    color: white;
+}
+
+.cart-table th {
+    padding: 15px;
+    border: none !important;
+}
+
+.cart-table td {
+    padding: 18px 12px;
+    vertical-align: middle;
+    border-bottom: 1px solid #eee;
+}
+
+/* Food name */
+
+.food-name {
+    font-weight: 700;
+    color: #333;
+    font-size: 17px;
+}
+
+/* Price */
+
+.cart-price {
+    color: #28a745;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Delete */
+
+.delete-btn {
+    background: #dc3545;
+    color: white !important;
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.delete-btn:hover {
+    background: #b02a37;
+    text-decoration: none;
+}
+
+/* ===== ORDER SUMMARY ===== */
+
+.summary-box {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.10);
+}
+
+.summary-title {
+    text-align: center;
+    font-size: 27px;
+    font-weight: 800;
+    color: #6a4c93;
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+}
+
+.summary-total {
+    color: #28a745;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+/* Checkout */
+
+.checkout-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #ff6b35, #ff9f1c);
+    color: white !important;
+    padding: 13px;
+    border-radius: 25px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 15px;
+}
+
+.checkout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(255,107,53,0.30);
+    text-decoration: none;
+}
+
+/* Continue shopping */
+
+.continue-btn {
+    display: block;
+    width: 100%;
+    background: #fff3cd;
+    color: #d35400 !important;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 12px;
+}
+
+.continue-btn:hover {
+    background: #ffb300;
+    color: white !important;
+    text-decoration: none;
+}
+
+/* Empty cart */
+
+.empty-cart {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-cart h3 {
+    font-size: 28px;
+    color: #555;
+}
+
+.empty-cart p {
+    color: #888;
+    font-size: 17px;
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+
+    .cart-title {
+        font-size: 32px;
+    }
+
+    .summary-box {
+        margin-top: 25px;
+    }
+
+}
+
+</style>
+
+
+<div class="cart-page">
+
+    <div class="container">
+
+        <!-- TITLE -->
+
+        <h1 class="cart-title">
+            🛒 Your FoodieHub Cart
+        </h1>
+
+
+        <div class="row">
+
+            <!-- CART ITEMS -->
+
+            <div class="col-md-8">
+
+                {% if cart_items %}
+
+                <div class="cart-box">
+
+                    <div class="table-responsive">
+
+                        <table class="table cart-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>🍽️ Food</th>
+
+                                    <th>Description</th>
+
+                                    <th>Details</th>
+
+                                    <th>Price</th>
+
+                                    <th>Quantity</th>
+
+                                    <th>Action</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {% for cart in cart_items %}
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="food-name">
+
+                                            {{ cart.item.title }}
+
+                                            {% if cart.item.labels %}
+
+                                            <span class="badge badge-{{ cart.item.label_colour }}">
+                                                {{ cart.item.labels }}
+                                            </span>
+
+                                            {% endif %}
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+                                        {{ cart.item.description }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ cart.item.instructions }}
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="cart-price">
+                                            ₹ {{ cart.item.price }}
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        🍽️ {{ cart.item.pieces }} Q
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <a
+                                            class="delete-btn"
+                                            href="{% url 'main:remove-from-cart' cart.id %}"
+                                        >
+                                            🗑️ Remove
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+                {% else %}
+
+                <div class="cart-box empty-cart">
+
+                    <h3>
+                        🛒 Your Cart is Empty
+                    </h3>
+
+                    <p>
+                        Looks like you haven't added any delicious food yet! 😋
+                    </p>
+
+                    <a
+                        href="/"
+                        class="checkout-btn"
+                        style="max-width:250px;margin:20px auto;"
+                    >
+                        🍴 Explore Food
+                    </a>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- ORDER SUMMARY -->
+
+            <div class="col-md-4">
+
+                <div class="summary-box">
+
+                    <h2 class="summary-title">
+                        🧾 Order Summary
+                    </h2>
+
+
+                    <div class="summary-item">
+
+                        Total
+
+                        <div class="summary-total">
+                            ₹ {{ total }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-item">
+
+                        🍽️ Number of Dishes
+
+                        <strong>
+                            {{ count }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-item">
+
+                        📦 Total Quantity
+
+                        <strong>
+                            {{ total_pieces }}
+                        </strong>
+
+                    </div>
+
+
+                    <a
+                        class="checkout-btn"
+                        href="{% url 'main:ordered' %}"
+                    >
+                        🤝 Proceed to Checkout
+                    </a>
+
+
+                    <a
+                        class="continue-btn"
+                        href="/"
+                    >
+                        🍴 Continue Shopping
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}

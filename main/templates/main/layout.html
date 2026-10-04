@@ -1,0 +1,242 @@
+{% load get_group %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- head section -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/styles.css' %}">
+    <style>
+/* ===== FoodieHub Professional Navbar ===== */
+
+.navbar {
+    background: #ffffff !important;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+    padding: 10px 20px;
+}
+
+.navbar-brand {
+    color: #ff6b35 !important;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.navbar-nav li a {
+    color: #333333 !important;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 10px 16px !important;
+    margin: 3px;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.navbar-nav li a:hover {
+    background: #ff6b35 !important;
+    color: white !important;
+}
+
+/* Logout */
+.logout-link button {
+    background: transparent;
+    border: none;
+    color: #dc3545;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.logout-link button:hover {
+    background: #dc3545;
+    color: white;
+}
+
+/* FoodieHub logo hover */
+.navbar-brand:hover {
+    color: #e85d04 !important;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .navbar-brand {
+        font-size: 23px;
+    }
+
+    .navbar-nav li a {
+        margin: 3px 0;
+    }
+}
+</style>
+    <title>Online Food Order System</title>
+</head>
+
+<!-- body section -->
+<body>
+
+    <!-- navigation bar -->
+    <!-- navigation bar -->
+<nav class="navbar navbar-expand-md foodie-navbar">
+
+    <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand foodie-brand" href="{% url 'main:home' %}">
+            Foodie<span>Hub</span>
+        </a>
+
+        <!-- Mobile menu -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ml-auto align-items-md-center">
+
+                <!-- Home -->
+                <li class="nav-item">
+                    <a href="{% url 'main:home' %}" class="nav-link foodie-link">
+                        Home
+                    </a>
+                </li>
+
+                {% if user.is_authenticated %}
+
+                    {% if request.user|has_group:"admin_owner" %}
+
+                        <!-- Admin -->
+                        <li class="nav-item">
+                            <a href="{% url 'main:admin_dashboard' %}"
+                               class="nav-link foodie-link">
+                                Dashboard
+                            </a>
+                        </li>
+
+                        <!-- Admin logout -->
+                        <li class="nav-item">
+                            <form
+                                class="logout-link"
+                                action="{% url 'accounts:logout' %}"
+                                method="post">
+
+                                {% csrf_token %}
+
+                                <button type="submit" class="logout-btn">
+                                    Logout
+                                </button>
+
+                            </form>
+                        </li>
+
+                    {% else %}
+
+                        <!-- User cart -->
+                        <li class="nav-item">
+                            <a href="{% url 'main:cart' %}"
+                               class="nav-link foodie-link">
+                                My Cart
+                            </a>
+                        </li>
+
+                        <!-- Orders -->
+                        <li class="nav-item">
+                            <a href="{% url 'main:order_details' %}"
+                               class="nav-link foodie-link">
+                                My Orders
+                            </a>
+                        </li>
+
+                        <li>
+                                <a href="{% url 'main:request_dish' %}" class="mr-2 text-light">
+                                Request a Dish
+                            </a>
+                        </li>
+
+                        <!-- User logout -->
+                        <li class="nav-item">
+                            <form
+                                class="logout-link"
+                                action="{% url 'accounts:logout' %}"
+                                method="post">
+
+                                {% csrf_token %}
+
+                                <button type="submit" class="logout-btn">
+                                    Logout
+                                </button>
+
+                            </form>
+                        </li>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <!-- Guest -->
+                    <li class="nav-item">
+                        <a href="{% url 'accounts:login' %}"
+                           class="nav-link foodie-link">
+                            Login
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'accounts:signup' %}"
+                           class="signup-btn">
+                            Sign Up
+                        </a>
+                    </li>
+
+                {% endif %}
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<!-- main section -->   
+    <main role="main">
+
+        <!-- if any msg -->
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        <!-- add content from other pages -->
+        {% block content %}
+
+        <!-- content from others page -->
+
+        {% endblock %}
+
+    </main>
+
+    <!--scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>$('.carousel').carousel();</script>
+
+</body>
+
+</html>

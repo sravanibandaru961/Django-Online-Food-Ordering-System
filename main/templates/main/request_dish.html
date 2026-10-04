@@ -1,0 +1,42 @@
+{% extends "main/layout.html" %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+
+                    <h2 class="text-center mb-3">
+                        Request a Dish
+                    </h2>
+
+                    <p class="text-center text-muted mb-4">
+                        Can't find the dish you're looking for?
+                        Send us a request.
+                    </p>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <button type="submit"
+                                class="btn btn-primary btn-block">
+                            Submit Request
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
